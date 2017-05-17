@@ -11,10 +11,12 @@ if (!is_null($events['events'])) {
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
-			// Get text sent
-			$text = $event['message']['text'];
+			
+            if ($event['message']['text'] == 'เปลี่ยนรหัส')
 			// Get replyToken
 			$replyToken = $event['replyToken'];
+
+            $text = 'กรุณาระบบ username : password เดิม เพื่อเปลี่ยนรหัส';
 
 			// Build message to reply back
 			$messages = [
