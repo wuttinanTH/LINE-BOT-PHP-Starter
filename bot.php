@@ -13,7 +13,12 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			
             if ($event['message']['text'] == 'เปลี่ยนรหัส') {
-                 $text = 'กรุณาระบบ username : password เดิม เพื่อเปลี่ยนรหัส';
+                 $text = 'กรุณาระบบ username, old password และ new password 
+                 ตามรูปแบบตัวอย่าง
+                 username : admin
+                 old password : myoldpassword
+                 new password : mynewpassword
+                 ';
             }else {
                  $text = $event['message']['text'];
             }
