@@ -13,12 +13,33 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			
             if ($event['message']['text'] == 'เปลี่ยนรหัส') {
-                 $text = 'กรุณาระบบ username, old password และ new password 
-                 ตามรูปแบบตัวอย่าง
-                 username : admin
-                 old password : myoldpassword
-                 new password : mynewpassword
-                 ';
+                 $text = '{
+                    "type": "template",
+                    "altText": "this is a buttons template",
+                    "template": {
+                        "type": "buttons",
+                        "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
+                        "title": "Menu",
+                        "text": "Please select",
+                        "actions": [
+                            {
+                                "type": "postback",
+                                "label": "Buy",
+                                "data": "action=buy&itemid=123"
+                            },
+                            {
+                                "type": "postback",
+                                "label": "Add to cart",
+                                "data": "action=add&itemid=123"
+                            },
+                            {
+                                "type": "uri",
+                                "label": "View detail",
+                                "uri": "http://example.com/page/123"
+                            }
+                        ]
+                    }
+            }';
             }else {
                  $text = $event['message']['text'];
             }
@@ -35,7 +56,7 @@ if (!is_null($events['events'])) {
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
-				'messages' => [$messages],
+				'messages' => [$text],
 			];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
